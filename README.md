@@ -19,9 +19,12 @@ npm install fakegen-data
 ```Js
 const {fakeGen} = require('fakegen-data')
 
-const name= fakeGen.generateFirstName()
+const name= fakeGen.firstName()
 console.log(name)
 ```
 ---
+
+
+## Features
 
 
