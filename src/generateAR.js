@@ -1,38 +1,75 @@
-const { fakerAR } = require("@faker-js/faker");
-const AR_names = require("../lib/arabicNames");
-const cities_MR = require("../lib/arabicCitiesMR");
-const randomValueInArray = require('./methods')
+// const { fakerAR } = require("@faker-js/faker");
+const {
+  AR_names,
+  cities_MR,
+  LastNames,
+  arabicLastNames,
+  arabicProducts,
+  StreetNamesAr,
+  citiesAr,
+  CountriesAr,
+  companyNamesAr,
+} = require("../lib/arabicData");
+const {randomValueInArray, multiplValueArr, randomAdress, randomLocation} = require("./methods");
 
-function generateFirstName() {
-    return randomValueInArray(AR_names);
+//this is for some methods that are identical to the normal generate
+const { id, zipCode, boolean, email } = require("./generate");
+
+function firstName() {
+  return randomValueInArray(AR_names);
 }
 
-function generateLastName(){
-    return fakerAR.person.lastName();
-}
-  
-function FullName(){
-    return `${fakerAR.person.firstName()} ${fakerAR.person.lastName()}`
+function lastName() {
+  // return fakerAR.person.lastName();
+  return randomValueInArray(arabicLastNames);
 }
 
-function cityMR(){
-    return randomValueInArray(cities_MR);
+function fullName() {
+  return `${firstName()} ${lastName()}`;
 }
 
-function generateCity(){
-    return fakerAR.location.city()
+function cityMR() {
+  return randomValueInArray(cities_MR);
 }
 
-function generateAddress(){
-    return fakerAR.location.streetAddress()
+function city() {
+//   return fakerAR.location.city();
+    return randomValueInArray(citiesAr) 
 }
 
-
-module.exports={
-    FullName,
-    generateLastName,
-    generateFirstName,
-    generateCity,
-    cityMR,
-    generateAddress,
+function country() {
+  return randomValueInArray(CountriesAr);
 }
+
+function location() {
+  return randomLocation(city(),country(),randomZipCode())
+}
+
+function address() {
+    return randomAdress(randomValueInArray(StreetNamesAr),city(),country(),randomZipCode())
+}
+
+function products(size) {
+    return multiplValueArr(size,arabicProducts)
+}
+
+function company(){
+    return randomValueInArray(companyNamesAr)
+}
+
+module.exports = {
+  fullName,
+  lastName,
+  firstName,
+  city,
+  location,
+  cityMR,
+  address,
+  id,
+  zipCode,
+  products,
+  country,
+  boolean,
+  email,
+  company,
+};

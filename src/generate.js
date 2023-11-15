@@ -1,57 +1,82 @@
-const { faker, fakerAR } = require("@faker-js/faker");
+const { v4: uuidv4 } = require('uuid');
 // const lang = require("../lib/languages");
-const AR_names = require("../lib/arabicNames.js");
-const randomValueInArray = require("./methods.js");
+// const AR_names = require("../lib/arabicData.js");
+const {randomValueInArray,multiplValueArr, randomAdress, randomObject, randomLocation} = require("./methods");
+const {namesArray,countries,citiesArrays,lastNames, jobs, productsArray, streets, companyNames} = require('../lib/EnData.js')
 
 // generate User stuff (name, lastname, full name)
 
-const startTime = performance.now();
+// const startTime = performance.now();
 
 function id() {
-  return faker.string.uuid();
+  return uuidv4();
 }
 
-function generateFirstName(la) {
+//generate firstname
+function firstName() {
+
+  return randomValueInArray(namesArray);
   // if (lang.find(lang=> lang=la)) {
-  if (la === "AR") {
-    return randomValueInArray(AR_names);
-  } else {
-    return faker.person.firstName();
-  }
-
-  //} else{
-  //   console.log("error ")
+  // if (la === "AR") {
+  //   return randomValueInArray(AR_names);
+  // } else {
+  //   return faker.person.firstName();
   // }
+  // randomValueInArray()
 }
-const endtTime = performance.now();
+// const endtTime = performance.now();
 
-function generateLastName() {
-  return faker.person.lastName();
-}
-
-function FullName() {
-  return `${faker.person.firstName()} ${faker.person.lastName()}`;
+//generate lastname
+function lastName() {
+  return randomValueInArray(lastNames);
 }
 
+// generate first name
+function fullName() {
+  return `${firstName()} ${lastName()}`;
+}
+
+//generate email
 function email() {
-  return faker.internet.email();
+  let firsthalf= firstName()+lastName()
+  let lasthalf=["exemple",'outlook',"gmail","mail","ukil","test"];
+  var index= Math.floor(Math.random() * lasthalf.length);
+  return `${firsthalf}@${lasthalf[index]}.com`
 }
-var executionTime = endtTime - startTime;
+// var executionTime = endtTime - startTime;
 
 
 //job title
 function job(){
-  return faker.person.jobTitle
+  return randomValueInArray(jobs)
 }
 
 //random city (in english)
-function generateCity() {
-  return faker.location.city();
-  // zcode:faker.location.zipCode(),
+function city() {
+  return randomValueInArray(citiesArrays);
+}
+function country(){
+  return randomValueInArray(countries)
+}
+//generate random zipcodes
+function zipCode() {
+  const min = 10000;
+  const max = 99999;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function generateAddress() {
-  return faker.location.streetAddress();
+//generate random locations:
+
+function location(){
+   return randomLocation(
+      city(),country(),zipCode()
+    )
+}
+
+
+
+function address() {
+  return randomAdress(randomValueInArray(streets),city(),country(),zipCode())
 }
 
 //generate dates between some dates in params
@@ -64,33 +89,42 @@ function generateAddress() {
 //     }
 // }
 
+
+function company(){
+  return randomValueInArray(companyNames);
+}
+
 //@param int size
 //return one or (size) products
 
 function products(size) {
-  const prods = [];
-  if (size !== null) {
-    var i = 0;
-    while (i < size) {
-      prods.push(faker.commerce.product());
-      i++;
-    }
-  }else{
-    prods.push(faker.commerce.product());
-  }
-  return prods;
+  return multiplValueArr(size,productsArray)
+}
+
+//return either a true or false
+function boolean() {
+  return Math.random() < 0.5; // Returns true or false with roughly equal probability
+};
+
+function phoneNumber(){
+
 }
 
 module.exports = {
   id,
-  generateFirstName,
-  generateLastName,
-  generateAddress,
-  FullName,
+  firstName,
+  lastName,
+  address,
+  fullName,
   job,
   email,
-  generateCity,
+  city,
   products,
+  location,
+  boolean,
+  zipCode,
+  country,
+  company,
   // betweenDates,
-  executionTime,
+  // executionTime,
 };
