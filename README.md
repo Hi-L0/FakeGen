@@ -36,10 +36,29 @@ For generating random data in latin alphabet
     - fullName
     - email
     - job
+    - address
     - city
     - country
     - zipCode
     - location (this generates an object {city,country,zipcode})
+    - company
+    - products
+    - boolean
+
+for generating random data in arabic
+
+- fakeGenAR
+    - id
+    - firstName
+    - lastName
+    - fullName
+    - email
+    - job
+    - address
+    - city
+    - country
+    - zipCode
+    - location
     - company
     - products
     - boolean
