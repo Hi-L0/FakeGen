@@ -1,6 +1,6 @@
 {
-  "name": "random-data-generator-package",
-  "version": "1.0.0",
+  "name": "fakegen-data",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.2.0",
-    "faker": "^6.6.6"
+
   }
 }
