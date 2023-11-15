@@ -25,6 +25,23 @@ console.log(name)
 ---
 
 
-## Features
+## Methods
+
+For generating random data in latin alphabet
+
+- fakeGen    
+    - id
+    - firstName
+    - lastName
+    - fullName
+    - email
+    - job
+    - city
+    - country
+    - zipCode
+    - location (this generates an object {city,country,zipcode})
+    - company
+    - products
+    - boolean
 
 
