@@ -22,7 +22,16 @@ const {fakeGen} = require('fakegen-data')
 const name= fakeGen.firstName()
 console.log(name)
 ```
+
+
+```Js
+const {fakeGenAR} = require('fakegen-data')
+
+const name= fakeGenAR.firstName()   //generate arabic firstname
+console.log(name)
+```
 ---
+
 
 
 ## Methods
