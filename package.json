@@ -1,7 +1,7 @@
 {
   "name": "fakegen-data",
   "version": "1.0.8",
-  "description": "",
+  "description": "fake data generator in both languages english and arabic",
   "main": "index.js",
   "scripts": {
    },
